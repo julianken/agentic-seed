@@ -6,10 +6,9 @@ name: scaffolding
 # scripts/validate-scaffolding.sh (which itself runs scripts/check-claude-shim.sh).
 # It deliberately does NOT run app lint/test/build: the repo is pre-code.
 
-on:
-  pull_request:
-  push:
-    branches: ["{{DEFAULT_BRANCH}}"]
+# Branch-agnostic on purpose: the scaffolding check is cheap and must run on the
+# template itself (whatever its default branch) and on every filled instance.
+on: [push, pull_request]
 
 # A later push to the same ref supersedes an in-flight run.
 concurrency:
