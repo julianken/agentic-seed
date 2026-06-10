@@ -1,0 +1,102 @@
+{
+  "stages": [
+    {
+      "id": "phase-0-brainstorm",
+      "title": "{{stage-0-title}}",
+      "order": 0,
+      "description": "{{stage-0-description}}",
+      "expectedAgents": [],
+      "links": [
+        { "label": "{{stage-0-brief-link-label}}", "href": "" }
+      ]
+    },
+    {
+      "id": "phase-1-validate",
+      "title": "{{stage-1-title}}",
+      "order": 1,
+      "description": "{{stage-1-description}}",
+      "expectedAgents": ["{{stage-1-agent}}"],
+      "links": []
+    },
+    {
+      "id": "phase-2-epic-authoring",
+      "title": "{{stage-2-title}}",
+      "order": 2,
+      "description": "{{stage-2-description}}",
+      "expectedAgents": ["{{stage-2-agent}}"],
+      "links": []
+    },
+    {
+      "id": "phase-3-figma-design",
+      "title": "{{stage-3-title}}",
+      "order": 3,
+      "description": "{{stage-3-description}}",
+      "expectedAgents": ["{{stage-3-agent}}"],
+      "links": []
+    },
+    {
+      "id": "phase-4-figma-review",
+      "title": "{{stage-4-title}}",
+      "order": 4,
+      "description": "{{stage-4-description}}",
+      "expectedAgents": ["{{stage-4-agent-review}}", "{{stage-4-agent-bot}}"],
+      "links": []
+    },
+    {
+      "id": "phase-5-issue-fan-out",
+      "title": "{{stage-5-title}}",
+      "order": 5,
+      "description": "{{stage-5-description}}",
+      "expectedAgents": ["{{stage-5-agent}}"],
+      "links": []
+    },
+    {
+      "id": "phase-6-plan-review",
+      "title": "{{stage-6-title}}",
+      "order": 6,
+      "description": "{{stage-6-description}}",
+      "expectedAgents": ["{{stage-6-agent-review}}", "{{stage-6-agent-bot}}"],
+      "links": []
+    },
+    {
+      "id": "phase-7-implement",
+      "title": "{{stage-7-title}}",
+      "order": 7,
+      "description": "{{stage-7-description}}",
+      "expectedAgents": ["{{stage-7-agent}}"],
+      "links": []
+    },
+    {
+      "id": "phase-8-pr-creation",
+      "title": "{{stage-8-title}}",
+      "order": 8,
+      "description": "{{stage-8-description}}",
+      "expectedAgents": ["{{stage-8-agent}}"],
+      "links": []
+    },
+    {
+      "id": "phase-9-pr-review",
+      "title": "{{stage-9-title}}",
+      "order": 9,
+      "description": "{{stage-9-description}}",
+      "expectedAgents": ["{{stage-9-agent-review}}", "{{stage-9-agent-bot}}", "{{stage-9-agent-design}}"],
+      "links": []
+    },
+    {
+      "id": "phase-10-merge",
+      "title": "{{stage-10-title}}",
+      "order": 10,
+      "description": "{{stage-10-description}}",
+      "expectedAgents": [],
+      "links": []
+    },
+    {
+      "id": "phase-11-deploy",
+      "title": "{{stage-11-title}}",
+      "order": 11,
+      "description": "{{stage-11-description}}",
+      "expectedAgents": [],
+      "links": []
+    }
+  ]
+}
