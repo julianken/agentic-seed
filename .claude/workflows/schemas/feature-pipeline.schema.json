@@ -23,7 +23,7 @@
     "repoSlug": {
       "type": "string",
       "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$",
-      "description": "GitHub owner/repo slug, e.g. '{{owner}}/{{repo}}'"
+      "description": "GitHub owner/repo slug, e.g. '{{OWNER}}/{{REPO}}'"
     },
     "brainstormBriefPath": {
       "type": "string",
