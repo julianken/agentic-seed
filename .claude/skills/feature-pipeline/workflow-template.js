@@ -16,7 +16,7 @@
  *
  * Instance literals (repo slug, dashboard URL, port) are supplied via args
  * from the P1 schema — they are NOT hard-coded here so that P7 can mirror
- * this template to julianken/agentic-seed with {{placeholders}} for any
+ * this template to julianken/agentic-seed with placeholders for any
  * instance-specific value.
  *
  * -----------------------------------------------------------------------------
