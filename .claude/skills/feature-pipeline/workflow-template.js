@@ -178,19 +178,27 @@ function fileContains(filePath, token) {
   }
 }
 
-async function postAgentComment(repoSlug, number, body) {
+async function postAgentComment(repoSlug, issueOrPrNumber, body, type = "issue") {
+  // type distinguishes issue vs PR callers; both resolve to the issues comments
+  // endpoint on GitHub (a PR is an issue for commenting purposes), so the param
+  // documents intent without changing the URL.
+  void type;
   // AGENT: prefix marks AI authorship — never on literal machine commands.
   const prefixedBody = `AGENT: ${body}`;
   await runCommand("gh", [
     "api",
-    `repos/${repoSlug}/issues/${number}/comments`,
+    `repos/${repoSlug}/issues/${issueOrPrNumber}/comments`,
     "-X", "POST",
     "-f", `body=${prefixedBody}`,
   ]);
 }
 
 function classifyChecks(statusCheckRollup) {
-  if (!statusCheckRollup || statusCheckRollup.length === 0) return true;
+  // Return false when the check list is absent or empty: an empty rollup means
+  // checks haven't reported yet (e.g. CI not yet enqueued after a push), NOT
+  // that they passed. Treating [] as green would let the pipeline race ahead of
+  // required gates. At least one COMPLETED/SUCCESS entry must be present.
+  if (!statusCheckRollup || statusCheckRollup.length === 0) return false;
   return statusCheckRollup.every(
     (c) => c.status === "COMPLETED" && c.conclusion === "SUCCESS"
   );
@@ -571,7 +579,7 @@ async function phase9_prReview(args, runState, emit_) {
     if (!converged) {
       await postAgentComment(args.repoSlug, prNumber,
         `PR #${prNumber} review did not converge after ${RESOLUTION_MAX_ATTEMPTS} attempts.`, "pr");
-      throw new Error(`PR_REVIEW_ESCALATED: PR #${prNumber}`);
+      throw new Error(`PR_REVIEW_ESCALATED: PR #${prNumber} issue #${issueNumber}`);
     }
   }
 
