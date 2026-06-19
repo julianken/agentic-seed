@@ -28,7 +28,9 @@ queue_rules:
       # (@{{CODEOWNER}}) authors the PRs and can't self-approve. Not bot-enforced;
       # tighten to `approved-reviews-by = {{REVIEW_BOT}}` to require that identity.
       - "#approved-reviews-by >= 1"
-      - base = {{DEFAULT_BRANCH}}
+      # Literal (not {{DEFAULT_BRANCH}}): Mergify parses {{…}} in a live condition as
+      # its own template syntax and rejects it as invalid config. Matches docs/optional/mergify.md.
+      - base = main
       - -draft
       - -conflict
       # CI gates — uncomment as workflows land:
