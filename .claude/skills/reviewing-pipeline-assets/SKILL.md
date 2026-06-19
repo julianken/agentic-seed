@@ -93,7 +93,7 @@ This definition is inlined here so the check is self-contained per A3 — it doe
 
 ### A5 — No-drift mirror present
 
-Per `AGENTS.md` → Skill ownership, a generic asset's `{{placeholder}}`-templated mirror in `julianken/agentic-seed` (and any user-level namesake, where one exists) must be updated in the same change set; the PR Summary must state it. A generic asset changed without its mirror reconciled is a finding.
+Per `AGENTS.md` → Skill ownership, a generic asset's `{{PLACEHOLDER}}`-templated mirror in `julianken/agentic-seed` (and any user-level namesake, where one exists) must be updated in the same change set; the PR Summary must state it. A generic asset changed without its mirror reconciled is a finding.
 
 **Check:** read the PR Summary. Confirm it either (a) states the agentic-seed mirror PR number/link, or (b) explicitly defers the mirror to a named downstream PR (e.g. the bulk P7 mirror PR) with a justification. A PR Summary that is silent on mirror state for a generic asset is a finding — raise it as IMPORTANT with the escape hatch: a one-line note (and, if it should be tracked, a `drift:docs` follow-up issue) is enough; never a merge blocker.
 
@@ -127,6 +127,6 @@ Like A1–A6, the server addendum is **additive coverage under the same R3 ≤3-
 
 This skill is **repo-local-only** — it has **no user-level namesake**. Asset review is instance-coupled to `{{REPO_SLUG}}`'s skill/agent conventions and the specific pipeline asset classes (P2/P3/P5/P6/P8/P9); a portable twin would carry violin-tools-specific knowledge it should not. There is therefore no user-level ↔ repo-local mirror pair and no user-level no-drift obligation for this skill.
 
-This skill is mirrored to **`julianken/agentic-seed`** with `{{placeholders}}` substituting instance literals (repo slug `{{REPO_SLUG}}`, bot identity `@{{REVIEW_BOT}}`, label scheme `pipeline`/`skill`/`review-tooling`) so the generic shape is reusable in other repos. The actual `{{placeholder}}`-templated copy in `julianken/agentic-seed` is created by the epic's **P7 bulk-mirror PR** (which covers this skill, the P5 engine, the P6 driving skill, and the P2 dashboard in one cross-repo PR). **P4 does not open the cross-repo mirror PR — P7 owns that.**
+This skill is mirrored to **`julianken/agentic-seed`** with `{{PLACEHOLDERS}}` substituting instance literals (repo slug `{{REPO_SLUG}}`, bot identity `@{{REVIEW_BOT}}`, label scheme `pipeline`/`skill`/`review-tooling`) so the generic shape is reusable in other repos. The actual `{{PLACEHOLDER}}`-templated copy in `julianken/agentic-seed` is created by the epic's **P7 bulk-mirror PR** (which covers this skill, the P5 engine, the P6 driving skill, and the P2 dashboard in one cross-repo PR). **P4 does not open the cross-repo mirror PR — P7 owns that.**
 
 A change to the generic shape of this skill (the A1–A6 structure, the server addendum, the applicability map) obliges the agentic-seed mirror to be reconciled in the same change set, with the PR Summary stating the mirror PR number or the P7 deferral.
