@@ -11,7 +11,9 @@
     "LICENSE_HOLDER": { "description": "Copyright holder for LICENSE", "example": "julianken" },
     "YEAR": { "description": "Copyright year", "example": "2026" },
     "REVIEW_BOT": { "description": "OPTIONAL: machine-user GitHub handle for the bot reviewer (no @). Blank disables the review-bot module.", "example": "julianken-bot", "optional": true },
-    "FIGMA_FILE_ID": { "description": "OPTIONAL: Figma file key for the design system. Blank disables the Figma module.", "example": "HWmo5hCeSXWtkSBiO1msIF", "optional": true }
+    "FIGMA_FILE_ID": { "description": "OPTIONAL: Figma file key for the design system. Blank disables the Figma module.", "example": "HWmo5hCeSXWtkSBiO1msIF", "optional": true },
+    "DEPLOY_URL": { "description": "Deployed site URL", "example": "https://violin-tools.pages.dev" },
+    "EPIC_TITLE_MARKER": { "description": "Unique substring in the epic issue title", "example": "[epic]" }
   },
   "derived": {
     "REPO_SLUG": "{{OWNER}}/{{REPO}}"
