@@ -11,7 +11,11 @@
     "LICENSE_HOLDER": { "description": "Copyright holder for LICENSE", "example": "julianken" },
     "YEAR": { "description": "Copyright year", "example": "2026" },
     "REVIEW_BOT": { "description": "OPTIONAL: machine-user GitHub handle for the bot reviewer (no @). Blank disables the review-bot module.", "example": "julianken-bot", "optional": true },
-    "FIGMA_FILE_ID": { "description": "OPTIONAL: Figma file key for the design system. Blank disables the Figma module.", "example": "HWmo5hCeSXWtkSBiO1msIF", "optional": true }
+    "FIGMA_FILE_ID": { "description": "OPTIONAL: Figma file key for the design system. Blank disables the Figma module.", "example": "HWmo5hCeSXWtkSBiO1msIF", "optional": true },
+    "BOT_IDENTITY": { "description": "Your review bot's GitHub identity", "example": "@mybot" },
+    "LABEL_SCHEME": { "description": "Your repo's issue label set", "example": "pipeline, skill, review-tooling" },
+    "VERDICT_TOKEN": { "description": "Your pipeline gate's approval token string", "example": "APPROVED" },
+    "WIP_PAGE_PATTERN": { "description": "Your Figma WIP page naming convention", "example": "WIP / ..." }
   },
   "derived": {
     "REPO_SLUG": "{{OWNER}}/{{REPO}}"
