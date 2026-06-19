@@ -137,10 +137,14 @@ node-ids — no verdict token (that is P9's contract).
 This skill runs in a worktree that does not load `AGENTS.md` / `CLAUDE.md`. All
 binding constraints are restated here:
 
-**(a) Scoped writes only.** Write Figma exclusively on the feature's WIP page
-(`{{WIP_PAGE_PATTERN}}`). A write to any shared system page (Foundations,
-Components, Screens, States, Motion, Annotations) is **forbidden** — treat it as a
-CRITICAL error and do not proceed.
+**(a) Scoped WIP writes only — never the canonical design.** This skill is the one
+narrow, documented exception to the repo-wide Figma write-tool ban (`INSTANCE.md` →
+"Design / Figma", `docs/optional/figma.md`): it writes Figma **exclusively** on the
+feature's WIP/scratch page (`{{WIP_PAGE_PATTERN}}`), and **never** edits a canonical
+design frame. A write to any canonical design frame, or to any shared system page
+(Foundations, Components, Screens, States, Motion, Annotations), is **forbidden** —
+the canonical design is human-only; treat any such write as a CRITICAL error and do
+not proceed.
 
 **(b) Load `/figma-use` first.** Every `use_figma` call requires the `/figma-use`
 skill to be loaded in the same session first. Never skip this step.
