@@ -1,6 +1,6 @@
 # Pipeline Dashboard
 
-Committed Node tracking server + dashboard for the {{PRODUCT_NAME}} feature pipeline.
+Committed Node tracking server + dashboard for the {{PROJECT_NAME}} feature pipeline.
 
 ## Run (on-demand; no always-on cron)
 
@@ -136,9 +136,9 @@ the four CI gates. It is standalone tooling.
 
 ## Fill-mode substitutions
 
-When filling this template, replace the following `{{placeholders}}`:
+When filling this template, replace the following `{{PLACEHOLDERS}}`:
 
 | Placeholder | Description |
 |---|---|
 | `{{REPO_SLUG}}` | GitHub `owner/repo` slug, e.g. `myorg/my-product` |
-| `{{PRODUCT_NAME}}` | Short product display name, e.g. `My Product` |
+| `{{PROJECT_NAME}}` | Short product display name, e.g. `My Product` |

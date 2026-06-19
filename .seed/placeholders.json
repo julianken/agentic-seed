@@ -2,6 +2,7 @@
   "_comment": "Authoritative placeholder glossary for the agentic-seed template. Every {{PLACEHOLDER}} that appears in a tracked file MUST be declared here. project-bootstrap fill-mode reads this to prompt for values and substitute them. 'example' is the violin-tools instance this seed was extracted from (illustrative, not a default).",
   "placeholders": {
     "PROJECT_NAME": { "description": "Display name of the product", "example": "Violin Tools" },
+    "PACKAGE_SCOPE": { "description": "npm package scope (no @ or leading slash)", "example": "violin-tools" },
     "PROJECT_TAGLINE": { "description": "One-line description of the product", "example": "a web app of focused practice tools for violinists" },
     "OWNER": { "description": "GitHub owner or org (no @)", "example": "julianken" },
     "REPO": { "description": "GitHub repository name", "example": "violin-tools" },

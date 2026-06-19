@@ -1,5 +1,5 @@
 /**
- * {{PRODUCT_NAME}} — Pipeline tracking server + dashboard (P2)
+ * {{PROJECT_NAME}} — Pipeline tracking server + dashboard (P2)
  *
  * Two-layer architecture:
  *   1. PRIMARY (ground-truth): poll `gh` (~25s cached) for issue/PR/CI status.
@@ -708,7 +708,7 @@ const server = createServer(app);
 
 server.listen(port, host, () => {
   const url = `http://${host}:${port}/`;
-  console.log(`{{PRODUCT_NAME}} — Pipeline dashboard serving at ${url}`);
+  console.log(`{{PROJECT_NAME}} — Pipeline dashboard serving at ${url}`);
   console.log(`  GET /api/config   pipeline stage taxonomy (P1 pipeline.json)`);
   console.log(`  GET /api/status   gh-poll ground truth (${CACHE_TTL_SECONDS}s cache; ?force=1 to bypass)`);
   console.log(`  POST /api/runs/:runId/events   ingest in-flight workflow events`);
