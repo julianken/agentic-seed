@@ -40,6 +40,7 @@ Docs drift silently; updating them in the same PR is cheaper than catching it la
 | Mergify, the review bot, Figma, or the user-skills overlay (the personal-infra *behavior*, not just its prose) | the matching `docs/optional/` module (`mergify.md` / `review-bot.md` / `figma.md` / `user-skills.md`) — reconcile the adopt/skip explainer in the same PR; it points at the canonical source, never forks it |
 | review dispatch, the review rubric, plan review, or bot-review parity | this file (Review dispatch + Skill ownership), `.claude/skills/reviewing/` (+ the user-level review-bot skill — same-PR no-drift), `.claude/skills/issue-plan-review/`, `.claude/skills/pr-workflow/`, `.cursor/rules/review-dispatch.mdc`, `.claude/agents/README.md` |
 | behavior described by a spec or committed plan     | that spec or `docs/plans/` doc (reconcile in the same PR)                 |
+| the product's core concept/noun (a refocus or rename) OR a path made dormant/retained | the `INSTANCE.md` "Product concept (canonical noun)" block (canonical noun + retired terms), then run `scripts/check-concept-drift.sh` and fix or escape every hit; tag each kept-but-unused path `DORMANT:` / `RETAINED:` (see "DORMANT / RETAINED tag spec"); record the refocus rationale where this product keeps decisions (an ADR / `docs/decisions/` doc, if it has one) — all in the same PR |
 | implementation issue shape or plan-review gates  | `.claude/skills/issue-authoring/`, `.claude/skills/issue-plan-review/`, this file (Review dispatch) |
 | a process change, or a deferred-item trigger firing/retiring | `GAPS.md` (the deferred-with-trigger ledger) — reconcile it in the same PR |
 | who holds decision authority (code ownership)    | `.github/CODEOWNERS` (and the HIL section below)                         |
@@ -55,6 +56,21 @@ The table lists only what exists today; grow it (code, deps, CI rows) when those
 **Reviewer:** verify the PR updated every drift-prone file its diff implies (per the table), or that the author wrote `No doc updates needed` / justified leaving a specific doc stale. A change that alters behavior, a convention, or the design surface but leaves the matching file untouched is a finding. If the diff touched `AGENTS.md` or `CLAUDE.md`, confirm `scripts/check-claude-shim.sh` passes. **This is never a merge blocker** — a spec can be wrong while the PR is right. Raise it as an IMPORTANT finding with an escape hatch: a one-line note (and, if it should be tracked, a `drift:docs` follow-up issue) is enough.
 
 _(This is a repo convention the reviewing subagent reads from this file. Adding the same check to the shared user-level review skill would affect every repo and is a separate decision — deliberately not made here.)_
+
+## Concept-drift prevention — DORMANT / RETAINED tag spec
+
+A product accretes vocabulary as it evolves; when it **refocuses** (its core abstraction is renamed, or a direction is abandoned), stale copy describing the *old* shape can silently recur on the surfaces a user or the LLM reads as a present-tense product claim. Two pieces keep that from rotting the repo into self-contradiction, and both are portable (no product word lives in this file):
+
+- **The vocabulary contract** is `INSTANCE.md` → "Product concept (canonical noun)" — the **sole** place a product's canonical noun + retired terms live (declared as `CANONICAL-NOUN:` / `RETIRED-TERM:` lines). It's an instance fact, so it lives in `INSTANCE.md`, not here.
+- **The check** is `scripts/check-concept-drift.sh` — it reads that block, scans a default-but-override-able allowlist of live surfaces (`src/app`, `src/pipeline`, and the SoT/public docs — paths a pre-code repo doesn't have yet are skipped, not errors), and exits non-zero on a retired-term hit that carries no escape. It's part of the standard reviewing rubric (the `.claude/skills/reviewing/` concept-drift pass), so the review gates inherit it.
+
+A retired term legitimately survives in some places — history (old decisions/research/plans, never retro-edited), a deliberately-retained code path, a route/code identifier, the roadmap north-star. The **escape hatch** is a per-line tag (the check and the reviewer honor any one of these on the same line as the match):
+
+- **`DORMANT:`** — a code path / route / stage **intentionally retained but on no live path today** (e.g. a feature kept for a future milestone). Tag the line; don't delete the code.
+- **`RETAINED:`** — a **dependency / service / asset deliberately kept though unused** (the "vestigial" case).
+- **`concept-drift-ok: <reason>`** — an explicit per-line allow for legit retired-term prose that isn't code-path-shaped (a route identifier, the retired-terms list itself, a roadmap north-star). The reason is mandatory.
+
+A retired-term mention on a tagged line is sanctioned; an **untagged** one is drift. This is a default-with-escape-hatch convention, the template's CSO discipline: the check is the default, the tag is the documented escape. The reviewer pass treats untagged drift the PR introduces as an **IMPORTANT** finding (not a BLOCKER) with the usual one-line / `drift:docs`-follow-up escape, and applies the R7 pre-existing-issues exception — a *pre-existing* untagged path is out of scope; only drift this PR introduces, or a path this PR itself adds untagged, is the finding.
 
 ## Skill ownership
 

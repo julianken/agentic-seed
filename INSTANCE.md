@@ -35,6 +35,24 @@ The design system lives in Figma (file `{{FIGMA_FILE_ID}}`). Read it via the Fig
 
 **Node map** — *per-product node map goes here*: list this product's Figma pages and screens with their node-ids (URL form `https://figma.com/design/{{FIGMA_FILE_ID}}/?node-id=<n-n>`). Node-ids are drift-prone (a frame rename/reorder can renumber them) — the AGENTS.md Update-Triggers row, not the ids, is the safety net. If live Variable reads and Code Connect are unavailable on this Figma plan (`get_variable_defs` → `{}`), treat Figma as visual reference, not a token feed.
 
+## Product concept (canonical noun)
+
+<!-- The SOLE place this product's vocabulary lives. `scripts/check-concept-drift.sh`
+and the `.claude/skills/reviewing/` concept-drift pass READ this block and contain NO
+product words — so the same portable check works for every instance. FILL IN at bootstrap;
+the example values below are deliberately neutral sentinels (REPLACE-AT-BOOTSTRAP) and a
+{{PLACEHOLDER}}, NOT a real product term, so the check is inert on the bare template. -->
+
+A product accretes vocabulary as it evolves; when it **refocuses** (its core abstraction is renamed, or a direction is abandoned), stale copy describing the *old* shape can silently recur on the live surfaces a user or the LLM reads as a present-tense product claim. This block pins what the product currently IS so the drift check can catch the rest. See `AGENTS.md` → Update-Triggers (the concept-refocus row) and the `DORMANT:` / `RETAINED:` tag spec.
+
+- **Canonical noun** — the one word for what the product currently IS. One greppable line.
+  - `CANONICAL-NOUN: {{PROJECT_NAME}}` *(replace `{{PROJECT_NAME}}` with the live core-abstraction noun at refocus time, e.g. the thing the product produces today)*
+- **Retired terms** — words/phrases that describe an *abandoned* shape and must no longer appear as the live product description. One `RETIRED-TERM:` per line, literal-minded (matched case-insensitively, no NLP — a multi-word phrase is fine). The term is read from the text after the marker, up to the first backtick / `<!--` / `*` / `(`, so a line may carry a per-line `concept-drift-ok:` escape (inside an HTML comment) and the retired-terms list won't self-trip the check. This list starts as a neutral sentinel on the bare template; the check treats `REPLACE-AT-BOOTSTRAP` (and any unreplaced `{{PLACEHOLDER}}`) as "not declared yet" and stays inert. Replace it with the product's actual retired terms when a refocus happens (a fresh product has none — leave the sentinel).
+  - `RETIRED-TERM: REPLACE-AT-BOOTSTRAP`  <!-- concept-drift-ok: the retired-terms list itself --> *(replace `REPLACE-AT-BOOTSTRAP` with a real retired term, e.g. the abandoned core abstraction; keep the `concept-drift-ok:` escape on the line)*
+- This block is the **only** place a product's vocabulary lives. The check script and the reviewer pass read these `CANONICAL-NOUN:` / `RETIRED-TERM:` lines and embed no product words of their own.
+
+The sanctioned escape hatch for a legitimate retired-term mention (history, a deliberately-retained path, a route/code identifier, a roadmap north-star) is a per-line `DORMANT:` / `RETAINED:` / `concept-drift-ok: <reason>` tag — defined in `AGENTS.md` → "DORMANT / RETAINED tag spec".
+
 ## Merge / review infra (OPTIONAL — trim to what this repo actually uses)
 - **Mergify** (`.mergify.yml`): an approved PR squash-merges through the queue via a standalone `@Mergifyio queue` comment. The merge *method* and its invariants are process — see `.claude/skills/pr-workflow/SKILL.md` and the user-level `mergify-merge-workflow` skill. *(Delete this bullet if the repo does not use Mergify.)*
 - **`@{{REVIEW_BOT}}` is the sole non-author reviewer** *(OPTIONAL — delete this bullet if {{REVIEW_BOT}} is blank)*. Direct push to `{{DEFAULT_BRANCH}}` is blocked by a GitHub ruleset requiring 1 fresh approving review per HEAD from a non-author collaborator; the owner (`@{{CODEOWNER}}`, the lone code owner in `.github/CODEOWNERS`) authors PRs and can't self-approve, so `@{{REVIEW_BOT}}` — the only other collaborator — is what unblocks merge.
