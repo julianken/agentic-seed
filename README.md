@@ -11,7 +11,7 @@ This repo is itself unfilled: files contain `{{PLACEHOLDERS}}` (e.g. `{{PROJECT_
 - **[`DESIGN.md`](./DESIGN.md)** — a blank design source-of-truth skeleton (tokens, color, type, motion, components, accessibility). Wins on any design conflict once filled.
 - **[`CLAUDE.md`](./CLAUDE.md)** — a thin Claude-Code shim that imports `AGENTS.md` (shape enforced by `scripts/check-claude-shim.sh`). `GEMINI.md` is the equivalent shim for that tool.
 - **Skills** ([`.claude/skills/`](./.claude/skills/)) — the PR/review/merge knowledge: `project-bootstrap` (orient/validate an instance), `pr-workflow`, `creating-prs`, `reviewing`, `issue-authoring`, `issue-plan-review`.
-- **PR template & CI** — [`.github/PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md), `.github/` scaffolding-validation CI, and `scripts/` guards (`check-claude-shim.sh`, `validate-scaffolding.sh`).
+- **PR template & CI** — [`.github/PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md), `.github/` scaffolding-validation CI, and `scripts/` guards (`check-claude-shim.sh`, `check-concept-drift.sh`, `validate-scaffolding.sh`).
 - **Optional modules** — **Mergify** (`.mergify.yml`, queue-based squash-merge), the **review bot** (`{{REVIEW_BOT}}`), and **Figma** (`{{FIGMA_FILE_ID}}`). Each is disabled by leaving its placeholder blank; see `INSTANCE.md` for how each section is gated.
 - **[`.seed/placeholders.json`](./.seed/placeholders.json)** — the authoritative glossary: every `{{PLACEHOLDER}}` the template uses, with a description and an illustrative example value.
 

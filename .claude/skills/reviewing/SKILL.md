@@ -48,6 +48,14 @@ More than one BLOCKER in a single review → audit them; at least one is probabl
 
 Per `AGENTS.md` → "Keeping docs and drift-prone files current", verify the PR updated every drift-prone file its diff implies (per the Update Triggers table), **or** that the author wrote `No doc updates needed` / justified leaving a specific doc stale. If the diff touched `AGENTS.md` or `CLAUDE.md`, confirm `scripts/check-claude-shim.sh` passes. A change that alters behavior, a convention, or the design surface but leaves the matching file untouched is a finding — **but this is never a merge blocker**: raise it as an IMPORTANT finding with an escape hatch (a one-line note, and a `drift:docs` follow-up issue if it should be tracked). A spec can be wrong while the PR is right.
 
+## Concept-drift check (repo convention)
+
+Per `AGENTS.md` → "Concept-drift prevention — DORMANT / RETAINED tag spec", check the diff for the product's **retired vocabulary** surfacing on a live surface as a present-tense product claim. The product's canonical noun + retired terms live in `INSTANCE.md` → "Product concept (canonical noun)"; the enforcer is `scripts/check-concept-drift.sh` (it reads that block and contains no product words). **Verify, don't assert** (R2): run `bash scripts/check-concept-drift.sh` and read its output, or trace each hit to a `file:line`, before flagging anything.
+
+A retired-term mention is sanctioned when the line carries a `DORMANT:` / `RETAINED:` / `concept-drift-ok: <reason>` escape (the tag spec); an **untagged** mention the PR introduces — or a kept-but-unused path the PR adds without a `DORMANT:` / `RETAINED:` tag — is the finding. Confirm a kept-but-unused path the PR adds/keeps is tagged.
+
+**The R7 exception is load-bearing here.** R7 ("Pre-existing issues are out of scope") means a *pre-existing* untagged retired-term mention or vestigial path is **not** this PR's finding — only drift this PR introduces, or a path this PR itself adds untagged, counts. Confirm with `git log -p` / `git blame` that a flagged line was introduced by this PR. Concept drift is normally **IMPORTANT**, not BLOCKER (R6), it counts toward the ≤3-findings cap (R3), and it carries the same escape as a doc-currency finding (a one-line note, and a `drift:docs` follow-up issue if it should be tracked) — never a merge blocker.
+
 ## Review shape
 
 Lead with the **verdict**, then a **verification ledger** of what you actually ran/read this turn, then the findings (≤3, each with a file:line anchor and a severity tier), then a one-line bottom line. APPROVE | REQUEST_CHANGES. No boilerplate ledgers with pre-checked boxes; no APPROVE with zero files read.
